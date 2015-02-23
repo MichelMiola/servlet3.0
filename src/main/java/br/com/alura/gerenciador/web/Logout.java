@@ -1,26 +1,29 @@
 package br.com.alura.gerenciador.web;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns="/logout")
-public class Logout extends HttpServlet{
+public class Logout implements Tarefa{
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	public String execute(HttpServletRequest req, HttpServletResponse resp){
 		
-		req.getSession().removeAttribute("usuario.logado");
-        PrintWriter writer = resp.getWriter();
-        writer.println("<html><body>Logout efetuado</body></html>");
+		req.getSession().removeAttribute("usuarioLogado");
 		
+		/*
+		 * 302 - O código 302 significa que o recurso foi encontrado, mas o usuário deve 
+		 * 		 encontrá-lo em outro lugar, por isso o navegador segue essa indicação.
+		 * 
+		 * 200 - Conseguiu achar a pagina.
+		 * 
+		 * 500 - Erro que aconteceu no servidor.
+		 * 
+		 */
+		//RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/paginas/logout.html");
+		//dispatcher.forward(req, resp);
+		//resp.sendRedirect("logout.html");
+		
+		return "/WEB-INF/paginas/logout.html";
 	}
 
 }
